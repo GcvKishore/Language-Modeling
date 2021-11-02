@@ -99,7 +99,6 @@ def countStartWords(corpus):
             dict1[i[0]]=1
     return dict1
 
-
 '''
 countBigrams(corpus)
 #6 [Check6-1]
@@ -157,8 +156,18 @@ Parameters: dict mapping strs to ints ; dict mapping strs to (dicts mapping strs
 Returns: dict mapping strs to (dicts mapping strs to (lists of values))
 '''
 def buildBigramProbs(unigramCounts, bigramCounts):
-    return
-
+    dict1={}
+    for prevWord in bigramCounts:
+        word=[]
+        prob=[]
+        for k,v in bigramCounts[prevWord].items():
+            word.append(k)
+            prob.append(v/unigramCounts[prevWord])
+            dict2={}
+            dict2["words"]=word
+            dict2["probs"]=prob
+        dict1[prevWord]=dict2
+    return dict1
 
 '''
 getTopWords(count, words, probs, ignoreList)
@@ -345,7 +354,8 @@ if __name__ == "__main__":
     # test.testCountStartWords()
     # test.testCountBigrams()
     # test.testBuildUniformProbs()
-    test.testBuildUnigramProbs()
+    # test.testBuildUnigramProbs()
+    test.testBuildBigramProbs()
     ## Uncomment these for Week 2 ##
 """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
