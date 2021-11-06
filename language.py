@@ -187,7 +187,6 @@ def getTopWords(count, words, probs, ignoreList):
             dict2[a]= dict1[a]
     return dict2
 
-
 '''
 generateTextFromUnigrams(count, words, probs)
 #5 [Check6-2]
@@ -211,8 +210,21 @@ Parameters: int ; list of strs ; list of floats ; dict mapping strs to (dicts ma
 Returns: str
 '''
 def generateTextFromBigrams(count, startWords, startWordProbs, bigramProbs):
-    return
-
+    text = " "
+    choice = random.choices(startWords,weights=startWordProbs)[0]
+    text = text + choice
+    for i in range(count-1):
+        if (choice!="."):
+                x =bigramProbs[choice]['words']
+                y =bigramProbs[choice]['probs']
+                choice = random.choices(x,weights=y)[0]  
+                text = text + " " + choice
+                #print("z",z)
+                #print("sss", sentence)
+        else:
+            choice= random.choices(startWords,weights=startWordProbs)[0]
+            text = text + " " + choice
+    return text
 
 ### WEEK 3 ###
 
@@ -371,7 +383,8 @@ if __name__ == "__main__":
     # test.testBuildUnigramProbs()
     # test.testBuildBigramProbs()
     # test.testGetTopWords()
-    test.testGenerateTextFromUnigrams()
+    # test.testGenerateTextFromUnigrams()
+    test.testGenerateTextFromBigrams()
     ## Uncomment these for Week 2 ##
 """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
