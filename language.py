@@ -107,8 +107,16 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
-
+    dict1={}
+    for w in corpus:
+        for j in range(len(w)-1):
+            if w[j] not in dict1:
+                dict1[w[j]] = {}
+            if w[j+1] in dict1[w[j]]:
+                dict1[w[j]][w[j+1]] += 1
+            else:
+                dict1[w[j]][w[j+1]] = 1
+    return dict1
 
 ### WEEK 2 ###
 
@@ -324,7 +332,8 @@ if __name__ == "__main__":
     # test.testBuildVocabulary()
     # test.testCountUnigrams()
     # test.testGetStartWords()
-    test.testCountStartWords()
+    # test.testCountStartWords()
+    test.testCountBigrams()
     ## Uncomment these for Week 2 ##
 """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
