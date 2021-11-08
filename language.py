@@ -255,8 +255,12 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTopStartWords(corpus):
-    return
-
+    start=getStartWords(corpus)
+    start_Count=countStartWords(corpus)
+    startWordProbs=buildUnigramProbs(start,start_Count,len(corpus))
+    count=getTopWords(50,start,startWordProbs,ignore)
+    plot=barPlot(count,"Top State Words")
+    return plot
 
 '''
 graphTopNextWords(corpus, word)
@@ -265,8 +269,12 @@ Parameters: 2D list of strs ; str
 Returns: None
 '''
 def graphTopNextWords(corpus, word):
-    return
-
+    uni_count=countUnigrams(corpus)
+    bi_count=countBigrams(corpus)
+    bigramProb=buildBigramProbs(uni_count,bi_count)
+    count=getTopWords(10,bigramProb[word]["words"],bigramProb[word]["probs"],ignore)
+    plot=barPlot(count,"Top Next Words")
+    return plot
 
 '''
 setupChartData(corpus1, corpus2, topWordCount)
